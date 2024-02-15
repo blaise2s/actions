@@ -31,7 +31,7 @@ on:
         default: ''
 
 jobs:
-  get-latest-release:
+  increment-latest-release:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
