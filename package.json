@@ -2,8 +2,15 @@
   "repository": "https://github.com/blaise2s/actions",
   "author": "Blaise Schaeffer",
   "license": "MIT",
+  "scripts": {
+    "build": "yarn build:get-latest-release",
+    "build:get-latest-release": "tsc --p get-latest-release/tsconfig.json && ncc build get-latest-release/lib/main.js -o get-latest-release/dist"
+  },
   "devDependencies": {
+    "@actions/core": "^1.10.1",
+    "@actions/github": "^6.0.0",
     "@types/node": "^20.11.19",
+    "@vercel/ncc": "^0.38.1",
     "typescript": "^5.3.3"
   },
   "packageManager": "yarn@4.1.0"

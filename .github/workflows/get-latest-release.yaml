@@ -1,0 +1,35 @@
+name: Get Latest Release
+run-name: Get latest release for ${{ inputs.repository }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      repository:
+        description: Repository name with owner. For example, Microsoft/Typescript.
+        type: string
+        required: true
+      exclude:
+        description: >
+          Comma separated list of releases to exclude. For example, prerelease,draft.
+          Acceptable values are prerelease and draft.
+        type: string
+        required: false
+        default: ''
+
+jobs:
+  get-latest-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Get latest release for ${{ inputs.repository }}
+        id: getLatestRelease
+        uses: ./get-latest-release
+        with:
+          repository: ${{ inputs.repository }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          exclude: ${{ inputs.exclude }}
+
+      - name: The latest release for ${{ inputs.repository }} is ${{ steps.getLatestRelease.outputs.latestRelease }}
+        run: echo "${{ steps.getLatestRelease.outputs.latestRelease }}"

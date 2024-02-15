@@ -1,0 +1,26 @@
+name: Get Latest Release
+author: Blaise Schaeffer
+description: Get the latest release from a GitHub repository.
+
+inputs:
+  repository:
+    description: Repository name with owner. For example, Microsoft/Typescript.
+    type: string
+    required: false
+    default: ${{ github.repository }}
+  token:
+    description: GitHub or personal access token (PAT) used to fetch the repository.
+    type: string
+    required: false
+    default: ${{ github.token }}
+  exclude:
+    description: >
+      Comma separated list of releases to exclude. For example, prerelease,draft.
+      Acceptable values are prerelease and draft.
+    type: string
+    required: false
+    default: ''
+
+runs:
+  using: node20
+  main: dist/index.js
