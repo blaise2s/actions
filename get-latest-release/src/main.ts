@@ -17,13 +17,10 @@ const getFilterPredicate = (exclude: Exclusion[]) => {
 };
 
 const getLatestRelease = async () => {
-  const repository = 'Microsoft/TypeScript';
-  // const repository = getInput('repository');
+  const repository = getInput('repository');
   const [owner, repo] = repository.split('/');
-  const token = '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';
-  // const token = getInput('token');
-  const exclude = 'prerelease,draft'.split(',') as Exclusion[];
-  // const exclude = getInput('exclude').split(',') as Exclusion[];
+  const token = getInput('token');
+  const exclude = getInput('exclude').split(',') as Exclusion[];
 
   const octokit = getOctokit(token);
 
