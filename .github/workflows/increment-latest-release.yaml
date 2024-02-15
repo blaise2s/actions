@@ -15,10 +15,6 @@ on:
         type: string
         required: false
         default: ''
-      versionNumber:
-        description: Version number to increment.
-        type: string
-        required: true
       bump:
         description: Number within the version to bump. Can be major, minor, or patch.
         type: choice
