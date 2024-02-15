@@ -32,13 +32,10 @@ const getFilterPredicate = (exclude) => {
     return () => true;
 };
 const getLatestRelease = () => __awaiter(void 0, void 0, void 0, function* () {
-    const repository = 'Microsoft/TypeScript';
-    // const repository = getInput('repository');
+    const repository = (0, core_1.getInput)('repository');
     const [owner, repo] = repository.split('/');
-    const token = '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';
-    // const token = getInput('token');
-    const exclude = 'prerelease,draft'.split(',');
-    // const exclude = getInput('exclude').split(',') as Exclusion[];
+    const token = (0, core_1.getInput)('token');
+    const exclude = (0, core_1.getInput)('exclude').split(',');
     const octokit = (0, github_1.getOctokit)(token);
     const { data: releases } = yield octokit.rest.repos.listReleases({
         owner,
