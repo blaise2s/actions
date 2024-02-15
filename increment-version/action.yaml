@@ -1,0 +1,31 @@
+name: Increment Version
+author: Blaise Schaeffer
+description: Increment a version number by bumping major, minor, or patch.
+
+inputs:
+  versionNumber:
+    description: Version number to increment.
+    type: string
+    required: true
+  bump:
+    description: Number within the version to bump. Can be major, minor, or patch.
+    type: choice
+    required: true
+    default: minor
+    options:
+      - major
+      - minor
+      - patch
+  prefix:
+    description: Prepended to the version.
+    type: string
+    required: false
+    default: ''
+
+outputs:
+  nextVersion:
+    description: The next version.
+
+runs:
+  using: node20
+  main: dist/index.js

@@ -21,6 +21,10 @@ inputs:
     required: false
     default: ''
 
+outputs:
+  latestRelease:
+    description: The latest release.
+
 runs:
   using: node20
   main: dist/index.js
