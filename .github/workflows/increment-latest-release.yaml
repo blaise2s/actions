@@ -1,0 +1,61 @@
+name: Increment Latest Release
+run-name: Get latest release for ${{ inputs.repository }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      repository:
+        description: Repository name with owner. For example, Microsoft/Typescript.
+        type: string
+        required: true
+      exclude:
+        description: >
+          Comma separated list of releases to exclude. For example, prerelease,draft.
+          Acceptable values are prerelease and draft.
+        type: string
+        required: false
+        default: ''
+      versionNumber:
+        description: Version number to increment.
+        type: string
+        required: true
+      bump:
+        description: Number within the version to bump. Can be major, minor, or patch.
+        type: choice
+        required: true
+        default: minor
+        options:
+          - major
+          - minor
+          - patch
+      prefix:
+        description: Prepended to the version.
+        type: string
+        required: false
+        default: ''
+
+jobs:
+  get-latest-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Get latest release for ${{ inputs.repository }}
+        id: getLatestRelease
+        uses: ./get-latest-release
+        with:
+          repository: ${{ inputs.repository }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          exclude: ${{ inputs.exclude }}
+
+      - name: Increment release for ${{ inputs.repository }}@${{ steps.getLatestRelease.outputs.latestRelease }}
+        id: incrementVersion
+        uses: ./increment-version
+        with:
+          versionNumber: ${{ steps.getLatestRelease.outputs.latestRelease }}
+          bump: ${{ inputs.bump }}
+          prefix: ${{ inputs.prefix }}
+
+      - name: The next release for ${{ inputs.repository }} is ${{ steps.incrementVersion.outputs.nextVersion }}
+        run: echo "${{ steps.incrementVersion.outputs.nextVersion }}"
