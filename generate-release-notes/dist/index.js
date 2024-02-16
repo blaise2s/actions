@@ -20,19 +20,13 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core_1 = __nccwpck_require__(2186);
 const github_1 = __nccwpck_require__(5438);
 const generateReleaseNotes = () => __awaiter(void 0, void 0, void 0, function* () {
-    const repository = 'blaise2s/actions';
-    // const repository = getInput('repository');
+    const repository = (0, core_1.getInput)('repository');
     const [owner, repo] = repository.split('/');
-    const tagName = '1.0.0';
-    // const tagName = getInput('tagName');
-    const targetCommitish = 'main';
-    // const targetCommitish = getInput('targetCommitish');
-    const previousTagName = '';
-    // const previousTagName = getInput('previousTagName');
-    const configurationFilePath = '';
-    // const configurationFilePath = getInput('configurationFilePath');
-    const token = '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';
-    // const token = getInput('token');
+    const tagName = (0, core_1.getInput)('tagName');
+    const targetCommitish = (0, core_1.getInput)('targetCommitish');
+    const previousTagName = (0, core_1.getInput)('previousTagName');
+    const configurationFilePath = (0, core_1.getInput)('configurationFilePath');
+    const token = (0, core_1.getInput)('token');
     const octokit = (0, github_1.getOctokit)(token);
     const { data: { name, body }, } = yield octokit.rest.repos.generateReleaseNotes(Object.assign(Object.assign({ owner,
         repo, tag_name: tagName, target_commitish: targetCommitish }, (previousTagName && { previous_tag_name: previousTagName })), (configurationFilePath && {
