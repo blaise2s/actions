@@ -33,8 +33,8 @@ const createRelease = () => __awaiter(void 0, void 0, void 0, function* () {
     const makeLatest = (0, core_1.getInput)('makeLatest');
     const token = (0, core_1.getInput)('token');
     const octokit = (0, github_1.getOctokit)(token);
-    yield octokit.rest.repos.createRelease(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({ owner,
-        repo, tag_name: tagName, target_commitish: targetCommitish }, (name && { name })), (body && { body })), { draft,
+    yield octokit.rest.repos.createRelease(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({ owner,
+        repo, tag_name: tagName }, (targetCommitish && { target_commitish: targetCommitish })), (name && { name })), (body && { body })), { draft,
         prerelease }), (discussionCategoryName && {
         discussion_category_name: discussionCategoryName,
     })), { generate_release_notes: generateReleaseNotes }), (makeLatest && { make_latest: makeLatest })));

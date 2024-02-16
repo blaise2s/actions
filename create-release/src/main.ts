@@ -24,7 +24,7 @@ const createRelease = async () => {
     owner,
     repo,
     tag_name: tagName,
-    target_commitish: targetCommitish,
+    ...(targetCommitish && { target_commitish: targetCommitish }),
     ...(name && { name }),
     ...(body && { body }),
     draft,
