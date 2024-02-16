@@ -7,8 +7,7 @@ on:
       repository:
         description: Repository name with owner. For example, Microsoft/Typescript.
         type: string
-        required: false
-        default: ${{ github.repository }}
+        required: true
       exclude:
         description: >
           Comma separated list of releases to exclude. For example, prerelease,draft.
