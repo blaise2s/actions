@@ -19,7 +19,6 @@ const generateReleaseNotes = async () => {
     repo,
     tag_name: tagName,
     target_commitish: targetCommitish,
-    // Optional
     ...(previousTagName && { previous_tag_name: previousTagName }),
     ...(configurationFilePath && {
       configuration_file_path: configurationFilePath,
