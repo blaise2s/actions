@@ -103,7 +103,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
   create-release:
-    need: generate-release-notes
+    needs: generate-release-notes
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
