@@ -1,0 +1,101 @@
+name: Create Release
+run-name: Create release for ${{ inputs.repository }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      repository:
+        description: Repository name with owner. For example, Microsoft/Typescript.
+        type: string
+        required: true
+      tagName:
+        description: The name of the tag.
+        type: string
+        required: true
+      targetCommitish:
+        description: >
+          Specifies the commitish value that determines where the Git tag is created
+          from. Can be any branch or commit SHA. Unused if the Git tag already exists.
+          Default: the repository's default branch.
+        type: string
+        required: false
+        default: ''
+      name:
+        descriptions: The name of the release.
+        type: string
+        required: false
+        default: ''
+      body:
+        descriptions: Text describing the contents of the tag.
+        type: string
+        required: false
+        default: ''
+      draft:
+        description: >
+          true to create a draft (unpublished) release,
+          false to create a published one.
+        type: boolean
+        required: false
+        default: false
+      prerelease:
+        description: >
+          true to identify the release as a prerelease.
+          false to identify the release as a full release.
+        type: boolean
+        required: false
+        default: false
+      discussionCategoryName:
+        description: >
+          If specified, a discussion of the specified category
+          is created and linked to the release. The value must
+          be a category that already exists in the repository.
+          For more information, see
+          https://docs.github.com/discussions/managing-discussions-for-your-community/managing-categories-for-discussions-in-your-repository.
+        required: false
+        default: ''
+      generateReleaseNotes:
+        description: >
+          Whether to automatically generate the name and body for
+          this release. If name is specified, the specified name
+          will be used; otherwise, a name will be automatically
+          generated. If body is specified, the body will be pre-pended
+          to the automatically generated notes.
+        type: boolean
+        required: false
+        default: false
+      makeLatest:
+        description: >
+          Specifies whether this release should be set as the latest release
+          for the repository. Drafts and prereleases cannot be set as latest.
+          Defaults to true for newly published releases. legacy specifies that
+          the latest release should be determined based on the release creation
+          date and higher semantic version. Can be one of: true, false, legacy.
+        type: choice
+        required: false
+        default: 'true'
+        options:
+          - 'true'
+          - 'false'
+          - legacy
+
+jobs:
+  create-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Create release for ${{ inputs.repository }}
+        uses: ./create-release
+        with:
+          repository: ${{ inputs.repository }}
+          tagName: ${{ inputs.tagName }}
+          targetCommitish: ${{ inputs.targetCommitish }}
+          name: ${{ inputs.name }}
+          body: ${{ inputs.body }}
+          draft: ${{ inputs.draft }}
+          prerelease: ${{ inputs.prerelease }}
+          discussionCategoryName: ${{ inputs.discussionCategoryName }}
+          generateReleaseNotes: ${{ inputs.generateReleaseNotes }}
+          makeLatest: ${{ inputs.makeLatest }}
+          token: ${{ secrets.GITHUB_TOKEN }}
