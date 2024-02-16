@@ -3,7 +3,8 @@
   "author": "Blaise Schaeffer",
   "license": "MIT",
   "scripts": {
-    "build": "yarn build:get-latest-release && yarn build:increment-version",
+    "build": "yarn build:generate-release-notes && yarn build:get-latest-release && yarn build:increment-version",
+    "build:generate-release-notes": "echo '\nBuilding generate-release-notes...' && tsc --p generate-release-notes/tsconfig.json && ncc build generate-release-notes/lib/main.js -o generate-release-notes/dist",
     "build:get-latest-release": "echo '\nBuilding get-latest-release...' && tsc --p get-latest-release/tsconfig.json && ncc build get-latest-release/lib/main.js -o get-latest-release/dist",
     "build:increment-version": "echo '\nBuilding increment-version...' &&tsc --p increment-version/tsconfig.json && ncc build increment-version/lib/main.js -o increment-version/dist"
   },
