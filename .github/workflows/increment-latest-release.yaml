@@ -16,7 +16,7 @@ on:
         required: false
         default: ''
       bump:
-        description: Number within the version to bump. Can be major, minor, or patch.
+        description: Number within the version to bump.
         type: choice
         required: true
         default: minor
