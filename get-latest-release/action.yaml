@@ -9,7 +9,7 @@ inputs:
     required: false
     default: ${{ github.repository }}
   token:
-    description: GitHub or personal access token (PAT) used to fetch the repository.
+    description: GitHub or personal access token (PAT) used to fetch repository details.
     type: string
     required: false
     default: ${{ github.token }}
