@@ -7,7 +7,7 @@
     "build:create-release": "echo '\nBuilding create-release...' && tsc --p create-release/tsconfig.json && ncc build create-release/lib/main.js -o create-release/dist",
     "build:generate-release-notes": "echo '\nBuilding generate-release-notes...' && tsc --p generate-release-notes/tsconfig.json && ncc build generate-release-notes/lib/main.js -o generate-release-notes/dist",
     "build:get-latest-release": "echo '\nBuilding get-latest-release...' && tsc --p get-latest-release/tsconfig.json && ncc build get-latest-release/lib/main.js -o get-latest-release/dist",
-    "build:increment-version": "echo '\nBuilding increment-version...' &&tsc --p increment-version/tsconfig.json && ncc build increment-version/lib/main.js -o increment-version/dist"
+    "build:increment-version": "echo '\nBuilding increment-version...' && tsc --p increment-version/tsconfig.json && ncc build increment-version/lib/main.js -o increment-version/dist"
   },
   "devDependencies": {
     "@actions/core": "^1.10.1",
