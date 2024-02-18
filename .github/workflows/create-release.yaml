@@ -82,11 +82,8 @@ jobs:
   create-release:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
       - name: Create release for ${{ inputs.repository }}
-        uses: ./create-release
+        uses: blaise2s/actions/create-release@main
         with:
           repository: ${{ inputs.repository }}
           tagName: ${{ inputs.tagName }}

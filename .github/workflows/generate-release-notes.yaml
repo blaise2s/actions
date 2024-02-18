@@ -49,12 +49,9 @@ jobs:
   generate-release-notes:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
       - name: Generate release notes for ${{ inputs.repository }}
         id: generateReleaseNotes
-        uses: ./generate-release-notes
+        uses: blaise2s/actions/generate-release-notes@main
         with:
           repository: ${{ inputs.repository }}
           tagName: ${{ inputs.tagName }}
