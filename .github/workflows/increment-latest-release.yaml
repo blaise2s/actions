@@ -34,12 +34,9 @@ jobs:
   increment-latest-release:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
       - name: Get latest release for ${{ inputs.repository }}
         id: getLatestRelease
-        uses: ./get-latest-release
+        uses: blaise2s/actions/get-latest-release@main
         with:
           repository: ${{ inputs.repository }}
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -47,7 +44,7 @@ jobs:
 
       - name: Increment release for ${{ inputs.repository }}@${{ steps.getLatestRelease.outputs.latestRelease }}
         id: incrementVersion
-        uses: ./increment-version
+        uses: blaise2s/actions/increment-version@main
         with:
           versionNumber: ${{ steps.getLatestRelease.outputs.latestRelease }}
           bump: ${{ inputs.bump }}
